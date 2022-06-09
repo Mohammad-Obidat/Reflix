@@ -22,7 +22,7 @@ class Movie extends Component {
         <CardMedia
           component='img'
           height='140'
-          image={this.props.image}
+          image={`https://image.tmdb.org/t/p/original/${this.props.image}`}
           alt='card image'
         />
         <CardContent>
@@ -34,17 +34,25 @@ class Movie extends Component {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size='small' onClick={this.isRented}>
-            {this.props.isRented ? (
-              <Fab size='small' color='primary' aria-label='delete'>
-                <DeleteIcon />
-              </Fab>
-            ) : (
-              <Fab size='small' color='primary' aria-label='add'>
-                <AddIcon />
-              </Fab>
-            )}
-          </Button>
+          {this.props.isRented ? (
+            <Fab
+              size='small'
+              color='primary'
+              aria-label='delete'
+              onClick={this.isRented}
+            >
+              <DeleteIcon />
+            </Fab>
+          ) : (
+            <Fab
+              size='small'
+              color='primary'
+              aria-label='add'
+              onClick={this.isRented}
+            >
+              <AddIcon />
+            </Fab>
+          )}
           <Link to={`/catalog/movies/${this.props.id}`}>
             <Button size='small'>View Movie</Button>
           </Link>

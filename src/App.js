@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import axios from 'axios';
 import Catalog from './components/Catalog';
 import Landing from './components/Landing';
 import MovieDetail from './components/MovieDetail';
@@ -25,29 +26,30 @@ class App extends Component {
           url: 'https://img.freepik.com/free-photo/fun-3d-cartoon-casual-character-woman_183364-80070.jpg?t=st=1654607775~exp=1654608375~hmac=b66402ce471aa9c66f819d8db8e657189986397ec5c7c28e1cb01096a1a7ce7c&w=740',
         },
       ],
-      movies: [
-        {
-          id: 1,
-          label: 'Pirates Of Caribbean',
-          description: `Pirates of the Caribbean is a sweeping action-adventure story set in an era when villainous pirates scavenged the Caribbean seas.`,
-          imgURL:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDuXg9-SKv56luTkJykDg63FkHrC_ezykQ4w&usqp=CAU',
-          isRented: false,
-        },
-        {
-          id: 2,
-          label: 'Game Of Thrones',
-          description: `Game of Thrones is an HBO series that tells the story of a medieval country's civil war.`,
-          imgURL:
-            'https://upload.wikimedia.org/wikipedia/he/d/dc/Game_of_Thrones_2011_Intertitle.png',
-          isRented: false,
-        },
-      ],
+      movies: [],
       filteredMovies: [],
       isSearch: false,
       currentUser: 0,
     };
   }
+
+  componentDidMount = async () => {
+    let movies = await axios.get(
+      `https://api.themoviedb.org/3/movie/popular?page=1&api_key=${process.env.REACT_APP_API_KEY}`
+    );
+
+    this.setState({
+      movies: movies.data.results.map((m) => {
+        return {
+          id: m.id,
+          label: m.title,
+          description: m.overview,
+          imgURL: m.poster_path,
+          isRented: false,
+        };
+      }),
+    });
+  };
 
   currentUser = (userId) => {
     let currentUser = this.state.currentUser;

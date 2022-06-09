@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea, Grid } from '@mui/material';
 
 class MovieDetail extends Component {
   render() {
@@ -10,11 +15,27 @@ class MovieDetail extends Component {
     });
 
     return (
-      <div id='movieContainer'>
-        <h1>{movie.label}</h1>
-        <img id='movieImg' src={movie.imgURL} alt='' />
-        <p> {movie.description}</p>
-      </div>
+      <Grid container direction='column' alignItems='center' justify='center'>
+        <Grid item>
+          <Card sx={{ maxWidth: 300 }}>
+            <CardActionArea>
+              <CardMedia
+                component='img'
+                image={`https://image.tmdb.org/t/p/original/${movie.imgURL}`}
+                alt='green iguana'
+              />
+              <CardContent>
+                <Typography gutterBottom variant='h6' component='div'>
+                  {movie.label}
+                </Typography>
+                <Typography variant='body3' color='text.secondary'>
+                  {movie.description}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      </Grid>
     );
   }
 }

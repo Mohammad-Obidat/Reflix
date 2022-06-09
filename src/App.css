@@ -37,18 +37,6 @@
   }
 }
 
-#movieContainer {
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  text-align: center;
-}
-
-#movieImg {
-  width: 100%;
-  height: 100%;
-}
-
 #userBudget {
   display: inline;
   position: absolute;
