@@ -83,7 +83,7 @@ class App extends Component {
     return (
       <Router>
         <>
-          <Navbar />
+          <Navbar currentUser={this.currentUser} />
 
           <div style={{ margin: '20px' }}>
             <Route

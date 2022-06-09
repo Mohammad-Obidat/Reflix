@@ -8,6 +8,10 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 
 export class Navbar extends Component {
+  changeUser = () => {
+    this.props.currentUser(0);
+  };
+
   render() {
     return (
       <Box sx={{ flexGrow: 1 }}>
@@ -36,6 +40,7 @@ export class Navbar extends Component {
                 <Button
                   variant='contained'
                   sx={{ mr: 2, backgroundColor: '#00b8d4' }}
+                  onClick={this.changeUser}
                 >
                   Home
                 </Button>
